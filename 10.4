@@ -1,0 +1,53 @@
+
+10.4
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int f(const vector<int>& arr) {
+    int sum = 0;
+
+    for (int num : arr) {
+        if (num == 0) {
+            break;
+        }
+        sum += num;
+    }
+
+    return sum;
+}
+
+int main() {
+    int n;
+    cout << "Введите количество элементов массива: ";
+    cin >> n;
+
+    vector<int> arr(n);
+
+    cout << "Введите элементы массива: ";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+   
+    bool hasNegative = false;
+    for (int num : arr) {
+        if (num < 0) {
+            hasNegative = true;
+            break;
+        }
+    }
+
+    if (!hasNegative) {
+        cout << "В массиве нет отрицательных элементов." << endl;
+        return 0;
+    }
+
+   
+    int result = f(arr);
+    cout << "Сумма элементов до первого нуля: " << result << endl;
+
+    return 0;
+}
