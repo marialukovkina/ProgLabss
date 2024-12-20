@@ -1,0 +1,25 @@
+11.18
+
+import math
+
+def ff(matrix):
+
+    if not matrix:
+        return []
+
+    num_cols = len(matrix[0])
+    result = []
+
+    for j in range(num_cols):
+        column = [row[j] for row in matrix if row[j] > 0]
+        if not column:
+            result.append(0)
+            continue
+        geometric_mean = math.prod(column)**(1/len(column))
+        count_above = sum(1 for x in column if x > geometric_mean)
+        result.append(count_above)
+
+    return result
+
+matrix1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+print(ff(matrix1))
