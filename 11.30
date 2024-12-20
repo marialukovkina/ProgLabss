@@ -1,0 +1,51 @@
+11.30
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int f(int* row, int n) {
+    int max_count = 1;
+    for (int i = 0; i < n; i++) {
+        int count = 1;
+        for (int j = i + 1; j < n; j++) {
+            if (row[i] == row[j]) {
+                count++;
+            }
+        }
+        if (count > max_count) {
+            max_count = count;
+        }
+    }
+    return max_count;
+}
+int fr(int matrix[][100], int m, int n) {
+    int max_repeats = 0;
+    int row_with_max_repeats = -1;
+    for (int i = 0; i < m; i++) {
+        int current_max_repeats = f(matrix[i], n);
+        if (current_max_repeats >= max_repeats) {
+            max_repeats = current_max_repeats;
+            row_with_max_repeats = i;
+        }
+    }
+    return row_with_max_repeats;
+}
+int main() {
+    int m, n;
+    printf("Введите количество строк и столбцов матрицы: ");
+    scanf("%d %d", &m, &n);
+    int matrix[100][100];
+    printf("Введите элементы матрицы:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    int resultRow = fr(matrix, m, n);
+    if (resultRow != -1) {
+        printf("Номер последней строки с максимальным количеством одинаковых элементов: %d\n", resultRow + 1);
+    } else {
+        printf("Нет строк с одинаковыми элементами.\n");
+    }
+    return 0;
+}
